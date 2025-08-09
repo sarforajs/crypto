@@ -1,84 +1,280 @@
-/* Reset + Base Styling */
+/* Base Reset */
 body {
     margin: 0;
     padding: 0;
-    background: linear-gradient(145deg, #0f2027, #203a43, #2c5364);
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: #fff;
+    background: #000;
+    font-family: 'Courier New', monospace;
+    color: #00ff9d;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
+    overflow: hidden;
 }
 
+/* Green hacker-style glow */
 .container {
-    background-color: #1e1e2f;
+    background-color: rgba(0, 0, 0, 0.85);
     padding: 2rem 2.5rem;
     border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    border: 1px solid #00ff9d;
+    box-shadow: 0 0 20px #00ff9d, inset 0 0 20px #00ff9d;
     width: 100%;
     max-width: 450px;
 }
 
-h2 {
+/* Glitchy header animation */
+.glitch {
+    position: relative;
+    color: #00ff9d;
+    font-size: 1.6rem;
     text-align: center;
-    color: #00e5ff;
     margin-bottom: 1.5rem;
+    animation: flicker 2s infinite alternate;
+}
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+}
+.glitch::before {
+    animation: glitchTop 1s infinite linear alternate-reverse;
+    color: #ff005d;
+    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+}
+.glitch::after {
+    animation: glitchBottom 1s infinite linear alternate-reverse;
+    color: #00ff9d;
+    clip-path: polygon(0 66%, 100% 66%, 100% 100%, 0 100%);
 }
 
 label {
     display: block;
     margin: 1rem 0 0.3rem;
-    font-weight: 500;
+    font-weight: bold;
+    color: #00ff9d;
 }
 
 input[type="file"],
 input[type="password"],
+/* Style the dropdown itself */
 select {
-    width: 100%;
-    padding: 0.6rem;
-    border-radius: 8px;
-    border: none;
-    background-color: #2c2c3e;
-    color: #fff;
+    background-color: black;
+    color: #00ff9d;
+    border: 2px solid #00ff9d;
+    border-radius: 6px;
+    padding: 8px;
+    font-family: 'Courier New', monospace;
     font-size: 1rem;
-    box-shadow: inset 0 0 5px rgba(0, 229, 255, 0.1);
+    outline: none;
+    appearance: none;
 }
+
+/* Custom hover and focus style for the select box */
+select:hover, select:focus {
+    border-color: #00ff9d;
+    box-shadow: 0 0 8px #00ff9d;
+}
+/* Style for dropdown options */
+option {
+    background-color: black;
+    color: #00ff9d;
+}
+
+/* When hovering over an option */
+option:hover {
+    background-color: #00ff9d;
+    color: black;
+}
+
+/* For selected option in dropdown list */
+option:checked {
+    background-color: #00ff9d;
+    color: black;
+}
+
 
 input::file-selector-button {
     padding: 0.4rem 1rem;
-    background-color: #00e5ff;
+    background-color: #00ff9d;
     color: #000;
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-weight: bold;
 }
-
 input::file-selector-button:hover {
-    background-color: #00c7e6;
+    background-color: #00d684;
 }
 
 button {
     margin-top: 1.5rem;
     width: 100%;
     padding: 0.8rem;
-    background-color: #00e5ff;
+    background-color: #00ff9d;
     border: none;
     border-radius: 10px;
     font-size: 1.1rem;
     font-weight: bold;
     color: #000;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
-
 button:hover {
-    background-color: #00c7e6;
+    background-color: #00d684;
 }
 
-select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+/* Glitch animations */
+@keyframes glitchTop {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, -2px); }
+    40% { transform: translate(-5px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(-2px, 0); }
+    100% { transform: translate(0); }
+}
+@keyframes glitchBottom {
+    0% { transform: translate(0); }
+    20% { transform: translate(2px, 2px); }
+    40% { transform: translate(5px, 2px); }
+    60% { transform: translate(-2px, -2px); }
+    80% { transform: translate(2px, 0); }
+    100% { transform: translate(0); }
+}
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+    20%, 24%, 55% { opacity: 0.4; }
+}
+
+/* CRT Scanline effect */
+.scanlines {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0px,
+        rgba(0, 255, 157, 0.05) 1px,
+        rgba(0, 0, 0, 0) 2px
+    );
+}
+/* Project credit styling */
+.project-credit {
+    position: fixed;
+    bottom: 20px;
+    right: 25px;
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #00ff9d;
+    text-shadow: 0 0 3px #00ff9d, 0 0 8px #00ff9d, 0 0 12px #00ff9d;
+    z-index: 1000;
+    white-space: nowrap;
+    padding: 5px 10px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Glitch effect */
+.glitch {
+    position: relative;
+    display: inline-block;
+    animation: flicker 2s infinite alternate;
+    font-size: inherit;
+    font-weight: inherit;
+    text-shadow: 0 0 2px #00ff9d, 0 0 5px #00ff9d;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    opacity: 0.8;
+}
+
+.glitch::before {
+    animation: glitchTop 1.5s infinite linear alternate-reverse;
+    color: rgba(255, 0, 93, 0.8);
+    clip-path: polygon(0 0, 100% 0, 100% 40%, 0 40%);
+}
+
+.glitch::after {
+    animation: glitchBottom 1.5s infinite linear alternate-reverse;
+    color: rgba(0, 207, 255, 0.8);
+    clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+}
+
+/* CRT Scanline overlay */
+.crt-overlay {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 255, 157, 0.08) 0px,
+        rgba(0, 255, 157, 0.08) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    animation: crt-flicker 0.15s infinite;
+}
+
+/* Animations */
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+    20%, 24%, 55% { opacity: 0.6; }
+}
+
+@keyframes glitchTop {
+    0%, 100% { transform: translate(0, 0); }
+    20% { transform: translate(-1px, -1px); }
+    40% { transform: translate(-1px, 1px); }
+    60% { transform: translate(1px, -1px); }
+    80% { transform: translate(1px, 1px); }
+}
+
+@keyframes glitchBottom {
+    0%, 100% { transform: translate(0, 0); }
+    20% { transform: translate(1px, 1px); }
+    40% { transform: translate(1px, -1px); }
+    60% { transform: translate(-1px, 1px); }
+    80% { transform: translate(-1px, -1px); }
+}
+
+@keyframes crt-flicker {
+    0%, 100% { opacity: 0.15; }
+    50% { opacity: 0.2; }
+}
+
+/* Blinking Cursor for Typing Effect */
+.typing::after {
+    content: '|';
+    animation: blink 0.7s infinite;
+    color: #00ff99;
+    margin-left: 5px;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Footer Styling */
+.footer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-family: monospace;
+    color: #00ff99;
+    text-shadow: 0 0 5px #00ff99, 0 0 10px #00ff99;
 }
