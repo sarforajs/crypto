@@ -21,6 +21,7 @@ window.onload = function() {
 
     typeEffect(title, " Crypto Encrypt / Decrypt", 100, function() {
         // After title finishes, type footer
-        typeEffect(footer, "Project By: Sarforaj Shaikh & Faisal Mirza", 80);
+        typeEffect(footer, "Project By: Sarforaj Shaikh", 80);
     });
 };
+
